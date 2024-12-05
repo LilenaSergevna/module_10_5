@@ -24,16 +24,7 @@ print(time.time()-start_time)"""
 # Многопроцессный
 if __name__== '__main__':
     start_time = time.time()
-    proc1=multiprocessing.Process(target=read_info, args=(filenames[0],))
-    proc2=multiprocessing.Process(target=read_info, args=(filenames[1],))
-    proc3=multiprocessing.Process(target=read_info, args=(filenames[2],))
-    proc4=multiprocessing.Process(target=read_info, args=(filenames[3],))
-    proc1.start()
-    proc2.start()
-    proc3.start()
-    proc4.start()
-    proc1.join()
-    proc2.join()
-    proc3.join()
-    proc4.join()
+    #замена
+    with multiprocessing.Pool(processes=4) as pool:
+        pool.map(read_info, filenames)
     print(time.time() - start_time)
